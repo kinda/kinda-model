@@ -1,0 +1,21 @@
+{
+  "name": "kinda-model",
+  "version": "0.1.0",
+  "description": "...",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kinda/kinda-model"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Manuel Vila <mvila@3base.com>",
+  "license": "MIT",
+  "dependencies": {
+    "kinda-class": "https://github.com/kinda/kinda-class/tarball/master",
+    "kinda-object": "https://github.com/kinda/kinda-object/tarball/master",
+    "kinda-util": "https://github.com/kinda/kinda-util/tarball/master",
+    "lodash": "^2.4.1"
+  }
+}
