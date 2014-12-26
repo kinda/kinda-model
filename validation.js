@@ -18,6 +18,7 @@ var Validation = KindaClass.extend('Validation', function() {
         this.addValidator(validator);
       }, this);
     },
+    configurable: true,
     enumerable: true
   });
 
