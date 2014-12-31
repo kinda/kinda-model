@@ -3,7 +3,7 @@
 "use strict";
 
 var Model = require('./');
-var util = require('kinda-util').create();
+var log = require('kinda-log').create();
 
 var Person = Model.extend('Person', function() {
   this.addProperty('name', String, { defaultValue: 'Anonymous' });
@@ -12,4 +12,4 @@ var Person = Model.extend('Person', function() {
 
 var mvila = Person.create({ age: 3 });
 mvila.validate();
-util.log(mvila);
+log.info(mvila);

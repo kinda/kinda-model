@@ -13,9 +13,9 @@
   "author": "Manuel Vila <mvila@3base.com>",
   "license": "MIT",
   "dependencies": {
-    "kinda-class": "https://github.com/kinda/kinda-class/tarball/master",
-    "kinda-object": "https://github.com/kinda/kinda-object/tarball/master",
-    "kinda-util": "https://github.com/kinda/kinda-util/tarball/master",
+    "kinda-class": "kinda/kinda-class",
+    "kinda-object": "kinda/kinda-object",
+    "kinda-util": "kinda/kinda-util",
     "lodash": "^2.4.1"
   }
 }
