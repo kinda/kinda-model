@@ -17,9 +17,9 @@
   "author": "Manuel Vila <mvila@3base.com>",
   "license": "MIT",
   "dependencies": {
-    "kinda-class": "kinda/kinda-class",
-    "kinda-object": "kinda/kinda-object",
-    "kinda-util": "kinda/kinda-util",
+    "kinda-class": "^0.3.0",
+    "kinda-object": "^0.1.0",
+    "kinda-util": "^0.1.0",
     "lodash": "^2.4.1"
   }
 }
