@@ -11,7 +11,6 @@ suite('KindaModel', function() {
       this.addProperty('lastName', String);
     });
 
-    Person.constructPrototype();
     let properties = Person.prototype.properties;
     let keys = Object.keys(properties);
     assert.strictEqual(_.union(keys, ['firstName', 'lastName']).length, 2);
