@@ -17,7 +17,7 @@ suite('KindaModel', function() {
     assert.strictEqual(properties.firstName.name, 'firstName');
 
     let person;
-  
+
     person = Person.create();
     assert.deepEqual(person.serialize(), {});
 
@@ -81,11 +81,15 @@ suite('KindaModel', function() {
       this.addProperty('name', String);
       this.addProperty('age', Number);
       this.addProperty('isCool', Boolean);
+      this.addProperty('country', String, { converter(val) {
+        return val.toUpperCase();
+      }});
     });
 
-    let person = Person.create({ name: 123, age: '42', isCool: 'absolutely' });
+    let person = Person.create({ name: 123, age: '42', isCool: 'absolutely', country: 'France' });
     assert.deepEqual(
-      person.serialize(), { name: '123', age: 42, isCool: true }
+      person.serialize(),
+      { name: '123', age: 42, isCool: true, country: 'FRANCE' }
     );
   });
 

@@ -15,8 +15,10 @@ let Property = KindaObject.extend('Property', function() {
     this.convertValue = getConverter(type);
     this.serializeValue = getSerializer(type);
     _.forOwn(options, (val, key) => {
-      if (!(key in this)) throw new Error('option \'' + key + '\' is unknown');
-      this[key] = val;
+      if (key === 'converter') this.convertValue = val;
+      else if (key === 'serializer') this.serializeValue = val;
+      else if (!(key in this)) throw new Error('option \'' + key + '\' is unknown');
+      else this[key] = val;
     }, this);
   };
 
