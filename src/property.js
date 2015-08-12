@@ -4,8 +4,6 @@ let _ = require('lodash');
 let KindaObject = require('kinda-object');
 let Validation = require('./validation');
 
-let getConverter, getSerializer;
-
 let Property = KindaObject.extend('Property', function() {
   this.include(Validation);
 
@@ -14,8 +12,8 @@ let Property = KindaObject.extend('Property', function() {
     if (!type) throw new Error('type is missing');
     this.name = name;
     this.type = type;
-    this.converter = getConverter(type);
-    this.serializer = getSerializer(type);
+    this.convertValue = getConverter(type);
+    this.serializeValue = getSerializer(type);
     _.forOwn(options, (val, key) => {
       if (!(key in this)) throw new Error('option \'' + key + '\' is unknown');
       this[key] = val;
@@ -25,7 +23,7 @@ let Property = KindaObject.extend('Property', function() {
   this.defaultValue = undefined;
 });
 
-getConverter = function(type) {
+let getConverter = function(type) {
   let converter;
   if (type === Boolean) {
     converter = (val) => {
@@ -71,7 +69,7 @@ getConverter = function(type) {
   return converter;
 };
 
-getSerializer = function(type) {
+let getSerializer = function(type) {
   let serializer;
   if (type === Object) {
     serializer = serializeObject;

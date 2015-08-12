@@ -56,7 +56,7 @@ let KindaModel = KindaObject.extend('KindaModel', function() {
 
   this.setPropertyValue = function(prop, val) {
     let oldVal = this.getPropertyValue(prop);
-    if (val != null) val = prop.converter(val);
+    if (val != null) val = prop.convertValue(val);
     if (val === oldVal) return false;
     if (!this.hasOwnProperty('_propertyValues')) this._propertyValues = {};
     this._propertyValues[prop.name] = val;
@@ -93,7 +93,7 @@ let KindaModel = KindaObject.extend('KindaModel', function() {
     _.forOwn(this.properties, function(prop, key) {
       let val = this.getPropertyValue(prop);
       if (val == null) return;
-      val = prop.serializer(val);
+      val = prop.serializeValue(val);
       json[key] = val;
     }, this);
     return json;

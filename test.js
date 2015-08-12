@@ -17,7 +17,7 @@ suite('KindaModel', function() {
     assert.strictEqual(properties.firstName.name, 'firstName');
 
     let person;
-
+  
     person = Person.create();
     assert.deepEqual(person.serialize(), {});
 
@@ -29,6 +29,51 @@ suite('KindaModel', function() {
     );
     person.firstName = 'Eric';
     assert.strictEqual(person.firstName, 'Eric');
+  });
+
+  test('serialization', function() {
+    let Model = KindaModel.extend('Model', function() {
+      this.addProperty('boolean', Boolean);
+      this.addProperty('number', Number);
+      this.addProperty('string', String);
+      this.addProperty('array', Array);
+      this.addProperty('object', Object);
+      this.addProperty('date', Date);
+    });
+
+    let instance = Model.create({
+      boolean: true,
+      number: 123,
+      string: 'abc',
+      array: [1, 2, 3],
+      object: { a: 1, b: 2 },
+      date: new Date('2015-08-12T09:39:21.226Z')
+    });
+
+    assert.deepEqual(instance.serialize(), {
+      boolean: true,
+      number: 123,
+      string: 'abc',
+      array: [1, 2, 3],
+      object: { a: 1, b: 2 },
+      date: '2015-08-12T09:39:21.226Z'
+    });
+
+    let instance2 = Model.unserialize({
+      boolean: true,
+      number: 123,
+      string: 'abc',
+      array: [1, 2, 3],
+      object: { a: 1, b: 2 },
+      date: '2015-08-12T09:39:21.226Z'
+    });
+
+    assert.strictEqual(instance2.boolean, true);
+    assert.strictEqual(instance2.number, 123);
+    assert.strictEqual(instance2.string, 'abc');
+    assert.deepEqual(instance2.array, [1, 2, 3]);
+    assert.deepEqual(instance2.object, { a: 1, b: 2 });
+    assert.strictEqual(instance2.date.toJSON(), '2015-08-12T09:39:21.226Z');
   });
 
   test('property conversion', function() {
