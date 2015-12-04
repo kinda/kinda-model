@@ -26,7 +26,7 @@
     "lodash": "^3.9.1"
   },
   "devDependencies": {
-    "abstract-date": "^0.1.1",
+    "abstract-date": "^0.2.0",
     "babel": "^5.8.21",
     "babel-eslint": "^4.0.5",
     "chai": "^2.3.0",

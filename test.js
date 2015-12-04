@@ -295,7 +295,7 @@ suite('KindaModel', function() {
       {
         firstName: 'Manuel',
         lastName: 'Vila',
-        birthday: '1972-09-25 00:00:00.000'
+        birthday: '1972-09-25T00:00:00.000'
       }
     );
     assert.instanceOf(person.birthday, AbstractDate);
@@ -304,12 +304,12 @@ suite('KindaModel', function() {
       {
         firstName: 'Manuel',
         lastName: 'Vila',
-        birthday: '1972-09-25 00:00:00.000'
+        birthday: '1972-09-25T00:00:00.000'
       }
     );
-    person.birthday = '1972-09-25 10:07:00.000';
+    person.birthday = '1972-09-25T10:07:00.000';
     assert.instanceOf(person.birthday, AbstractDate);
-    assert.equal(person.birthday.toJSON(), '1972-09-25 10:07:00.000');
+    assert.equal(person.birthday.toJSON(), '1972-09-25T10:07:00.000');
     person.birthday = undefined;
     assert.isUndefined(person.birthday);
 
