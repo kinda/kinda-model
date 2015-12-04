@@ -2,6 +2,7 @@
 
 let _ = require('lodash');
 let assert = require('chai').assert;
+let AbstractDate = require('abstract-date').AbstractDate;
 let KindaModel = require('./src');
 
 suite('KindaModel', function() {
@@ -281,5 +282,41 @@ suite('KindaModel', function() {
     person = Person.create({ name: 'Dupont', age: 30, status: 'alive' });
     validity = person.checkValidity();
     assert.isTrue(validity.isValid);
+  });
+
+  test('custom type', function() {
+    let Person = KindaModel.extend('Person', function() {
+      this.addProperty('firstName', String);
+      this.addProperty('lastName', String);
+      this.addProperty('birthday', AbstractDate);
+    });
+
+    let person = Person.create(
+      {
+        firstName: 'Manuel',
+        lastName: 'Vila',
+        birthday: '1972-09-25 00:00:00.000'
+      }
+    );
+    assert.instanceOf(person.birthday, AbstractDate);
+    assert.deepEqual(
+      person.serialize(),
+      {
+        firstName: 'Manuel',
+        lastName: 'Vila',
+        birthday: '1972-09-25 00:00:00.000'
+      }
+    );
+    person.birthday = '1972-09-25 10:07:00.000';
+    assert.instanceOf(person.birthday, AbstractDate);
+    assert.equal(person.birthday.toJSON(), '1972-09-25 10:07:00.000');
+    person.birthday = undefined;
+    assert.isUndefined(person.birthday);
+
+    person = Person.create({ birthday: undefined });
+    assert.isUndefined(person.birthday);
+
+    person = Person.create();
+    assert.isUndefined(person.birthday);
   });
 });
