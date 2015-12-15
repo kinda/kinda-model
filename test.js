@@ -2,7 +2,7 @@
 
 let _ = require('lodash');
 let assert = require('chai').assert;
-let AbstractDate = require('abstract-date').AbstractDate;
+import AbstractDate from 'abstract-date';
 let KindaModel = require('./src');
 
 suite('KindaModel', function() {
@@ -291,13 +291,11 @@ suite('KindaModel', function() {
       this.addProperty('birthday', AbstractDate);
     });
 
-    let person = Person.create(
-      {
-        firstName: 'Manuel',
-        lastName: 'Vila',
-        birthday: '1972-09-25T00:00:00.000'
-      }
-    );
+    let person = Person.create({
+      firstName: 'Manuel',
+      lastName: 'Vila',
+      birthday: '1972-09-25T00:00:00.000'
+    });
     assert.instanceOf(person.birthday, AbstractDate);
     assert.deepEqual(
       person.serialize(),
@@ -318,5 +316,18 @@ suite('KindaModel', function() {
 
     person = Person.create();
     assert.isUndefined(person.birthday);
+  });
+
+  test('custom type inside an array', function() {
+    let Calendar = KindaModel.extend('Calendar', function() {
+      this.addProperty('dates', Array);
+    });
+
+    let calendar = Calendar.create({
+      dates: [new AbstractDate('1972-09-25T00:00:00.000')]
+    });
+    assert.instanceOf(calendar.dates[0], AbstractDate);
+    assert.equal(calendar.dates[0].toString(), '1972-09-25T00:00:00.000');
+    assert.deepEqual(calendar.serialize(), { dates: ['1972-09-25T00:00:00.000'] });
   });
 });

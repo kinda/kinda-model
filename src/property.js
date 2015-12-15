@@ -2,6 +2,7 @@
 
 let _ = require('lodash');
 let KindaObject = require('kinda-object');
+import { cloneDeep } from 'better-clone';
 let Validation = require('./validation');
 
 let Property = KindaObject.extend('Property', function() {
@@ -44,14 +45,14 @@ let getConverter = function(type) {
     };
   } else if (type === Object) {
     converter = (val) => {
-      return _.cloneDeep(val);
+      return cloneDeep(val);
     };
   } else if (type === Array) {
     converter = (val) => {
       if (!_.isArray(val)) {
         throw new Error('type mismatch (an array was expected)');
       }
-      return _.cloneDeep(val);
+      return cloneDeep(val);
     };
   } else if (typeof type === 'function') {
     converter = (val) => {
